@@ -120,7 +120,7 @@ function deleteMember() {
     </div>
 
     <div class="actions">
-        <a href="/member/update?memberNo=${member.memberNo}" class="btn-edit">수정</a>
+        <a href="/member/updateForm?memberNo=${member.memberNo}" class="btn-edit">수정</a>
 
         <button class="btn-delete" onclick="deleteMember()">삭제</button>
 

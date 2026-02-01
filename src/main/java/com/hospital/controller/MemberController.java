@@ -108,22 +108,75 @@ public class MemberController {
 		}
 		return "member/memberList";
 	}
-	
+
+	/**
+	 * 회원 상세 정보
+	 * 
+	 * @param m
+	 * @param model "message"
+	 * @return member/detail
+	 */
 	@GetMapping("/detail")
 	public String memberDetail(Member m, Model model) {
 		log.info("Detail =" + m.getMemberNo());
 		try {
-			Member member  = memberService.read(m);
-			if(member == null) {
-				model.addAttribute("message", "회원 정보가 없습니다.");
+			Member member = memberService.read(m);
+			if (member == null) {
+				model.addAttribute("message2", "회원 정보가 없습니다.");
 				return "member/failed";
 			}
-			model.addAttribute("member",member);
+			model.addAttribute("member", member);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "member/detail";
 	}
-	
 
+	@GetMapping("/updateForm")
+	public String memberUpdateForm(Member m, Model model) {
+		log.info("memberUpdate" + m.toString());
+		try {
+			Member member = memberService.read(m);
+			if (member == null) {
+				model.addAttribute("message", "회원님의 정보가 없습니다.");
+				return "member/failed";
+			}
+			model.addAttribute("member", member);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "member/updateForm";
+	}
+
+	@PostMapping("/update")
+	public String memberUpdate(Member m, Model model) {
+		log.info("memberUpdate member = " + m.toString());
+
+		try {
+			int count = memberService.update(m);
+			if (count > 0) {
+				model.addAttribute("message", "수정되었습니다.");
+				return "member/success2";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "member/failed";
+	}
+	
+	@PostMapping("/delete")
+	public String deleteMember(Member member,Model model) {
+		log.info("Delete member =" + member.toString());
+		try {
+			int count = memberService.delete(member);
+			if(count > 0) {
+				model.addAttribute("message","회원탈퇴 되었습니다.");
+				return "member/success2";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "member/failed";
+	}
+	
 }
