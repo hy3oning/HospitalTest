@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hospital.mapper.MemberMapper">
+	<insert id="create">
+	INSERT INTO MEMBER(MEMBER_NO,ID,PASSWORD,MEMBER_NAME,PHONE_NUMBER,BIRTH_DATE,ADDRESS,REGDATE)
+	VALUES (MEMBER_SEQ.NEXTVAL,#{id},#{password},#{memberName},#{phoneNumber},#{birthDate},#{address},SYSDATE)
+	</insert>
+
+	<update id="update">
+	UPDATE MEMBER 
+	<set>
+	<if test="password != null and password != ''">
+	PASSWORD = #{password},
+	</if>
+	PHONE_NUMBER = #{phoneNumber},
+	ADDRESS = #{address}
+	</set>
+	WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<delete id="delete">
+	DELETE FROM MEMBER WHERE MEMBER_NO = #{memberNo}
+	</delete>
+	
+	<select id="list" resultType="Member">
+	SELECT MEMBER_NO, ID, MEMBER_NAME, PHONE_NUMBER,BIRTH_DATE,ADDRESS,REGDATE FROM MEMBER
+	ORDER BY MEMBER_NO DESC
+	</select>
+	
+	<select id="read" resultType="Member">
+	SELECT * FROM MEMBER WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<select id="search" parameterType="Member" resultType="Member">
+    SELECT MEMBER_NO, ID, MEMBER_NAME, PHONE_NUMBER,
+           BIRTH_DATE, ADDRESS, REGDATE
+    FROM MEMBER
+
+    <where>
+        <if test="keyword != null and keyword != ''">
+            <choose>
+                <when test="searchType == 'id'">
+                    ID LIKE '%' || #{keyword} || '%'
+                </when>
+
+                <when test="searchType == 'name'">
+                    MEMBER_NAME LIKE '%' || #{keyword} || '%'
+                </when>
+
+                <when test="searchType == 'phone'">
+                    PHONE_NUMBER LIKE '%' || #{keyword} || '%'
+                </when>
+
+                <otherwise>
+                    (
+                        ID LIKE '%' || #{keyword} || '%'
+                        OR MEMBER_NAME LIKE '%' || #{keyword} || '%'
+                        OR PHONE_NUMBER LIKE '%' || #{keyword} || '%'
+                    )
+                </otherwise>
+            </choose>
+        </if>
+    </where>
+
+    ORDER BY MEMBER_NO DESC
+</select>
+
+	
+	<select id="login" resultType="Member">
+	SELECT * FROM MEMBER WHERE ID = #{id} AND PASSWORD = #{password}
+	</select>
+</mapper>
