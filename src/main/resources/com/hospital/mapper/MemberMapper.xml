@@ -17,4 +17,10 @@
 	</set>
 	WHERE MEMBER_NO = #{memberNo}
 	</update>
+	
+	<delete id="delete">
+	DELETE FROM MEMBER WHERE MEMBER_NO = #{memberNo}
+	</delete>
+	
+	
 </mapper>
