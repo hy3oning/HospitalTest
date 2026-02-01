@@ -17,5 +17,6 @@ public class Member {
 	private Date birthDate;
 	private String address;
 	private Date regDate;
-	
+	private String searchType;
+	private String keyword;
 }

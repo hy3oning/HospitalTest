@@ -73,7 +73,7 @@ tr:hover {
 	<div class="container">
 		<h2>회원 목록</h2>
 		<!-- 🔍 회원 검색 -->
-		<form method="get" action="/member/list"
+		<form method="get" action="/member/search"
 			style="margin-bottom: 20px; text-align: right;">
 			<select name="searchType" style="padding: 6px;">
 				<option value="">전체</option>
@@ -122,6 +122,7 @@ tr:hover {
 
 		<div class="actions">
 			<a href="/">메인으로</a>
+			<a href="/member/login">로그인하기</a>
 		</div>
 	</div>
 

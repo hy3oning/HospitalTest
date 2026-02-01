@@ -15,7 +15,6 @@ import com.hospital.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
 
-
 @Controller
 @Slf4j
 @MapperScan(basePackages = "com.hospital.mapper")
@@ -163,14 +162,14 @@ public class MemberController {
 		}
 		return "member/failed";
 	}
-	
+
 	@PostMapping("/delete")
-	public String deleteMember(Member member,Model model) {
+	public String deleteMember(Member member, Model model) {
 		log.info("Delete member =" + member.toString());
 		try {
 			int count = memberService.delete(member);
-			if(count > 0) {
-				model.addAttribute("message","회원탈퇴 되었습니다.");
+			if (count > 0) {
+				model.addAttribute("message", "회원탈퇴 되었습니다.");
 				return "member/success2";
 			}
 		} catch (Exception e) {
@@ -178,5 +177,17 @@ public class MemberController {
 		}
 		return "member/failed";
 	}
-	
+
+	@GetMapping("/search")
+	public String memberSearch(Member member, Model model) {
+		log.info("memberSearch member =" + member.toString());
+		try {
+			List<Member> memberList = memberService.search(member);
+			model.addAttribute("memberList", memberList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "member/memberList";
+	}
+
 }

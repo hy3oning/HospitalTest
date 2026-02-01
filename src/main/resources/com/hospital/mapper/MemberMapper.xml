@@ -31,10 +31,12 @@
 	SELECT * FROM MEMBER WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
-	<select id="search" resultType="Member">
-	SELECT MEMBER_NO, ID, MEMBER_NAME, PHONE_NUMBER, REGDATE FROM MEMBER
-	<where>
-	<where>
+	<select id="search" parameterType="Member" resultType="Member">
+    SELECT MEMBER_NO, ID, MEMBER_NAME, PHONE_NUMBER,
+           BIRTH_DATE, ADDRESS, REGDATE
+    FROM MEMBER
+
+    <where>
         <if test="keyword != null and keyword != ''">
             <choose>
                 <when test="searchType == 'id'">
@@ -59,9 +61,10 @@
             </choose>
         </if>
     </where>
+
     ORDER BY MEMBER_NO DESC
-	</where>
-	</select>
+</select>
+
 	
 	<select id="login" resultType="Member">
 	SELECT * FROM MEMBER WHERE ID = #{id} AND PASSWORD = #{password}
