@@ -3,11 +3,13 @@ package com.hospital.controller;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hospital.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
+
 
 @Controller
 @Slf4j
@@ -17,6 +19,15 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@GetMapping("/register")
+	public String memberRegister() {
+		return "member/register";
+	}
+	@GetMapping("/login")
+	public String memberLogin() {
+		return "member/login";
+	}
 	
 	
 }
