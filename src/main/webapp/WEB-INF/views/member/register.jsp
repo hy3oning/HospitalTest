@@ -62,7 +62,7 @@
 <div class="card">
     <h2>회원가입</h2>
 
-    <form action="/member/create" method="post">
+    <form action="/member/insert" method="post">
         <div class="input-group">
             <label>아이디</label>
             <input type="text" name="id" required>

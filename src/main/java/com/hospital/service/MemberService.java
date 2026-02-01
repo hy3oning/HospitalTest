@@ -17,4 +17,6 @@ public interface MemberService {
 	public Member read(Member member) throws Exception;
 
 	public List<Member> search(Member member) throws Exception;
+	
+	public Member login(Member member) throws Exception;
 }

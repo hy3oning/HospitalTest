@@ -63,4 +63,7 @@
 	</where>
 	</select>
 	
+	<select id="login" resultType="Member">
+	SELECT * FROM MEMBER WHERE ID = #{id} AND PASSWORD = #{password}
+	</select>
 </mapper>

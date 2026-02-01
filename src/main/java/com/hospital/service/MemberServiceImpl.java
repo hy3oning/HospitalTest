@@ -54,4 +54,10 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.search(member);
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public Member login(Member member) throws Exception {
+		return mapper.login(member);
+	}
+
 }
