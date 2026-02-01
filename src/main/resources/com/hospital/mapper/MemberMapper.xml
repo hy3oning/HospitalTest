@@ -31,5 +31,36 @@
 	SELECT * FROM MEMBER WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
+	<select id="search" resultType="Member">
+	SELECT MEMBER_NO, ID, MEMBER_NAME, PHONE_NUMBER, REGDATE FROM MEMBER
+	<where>
+	<where>
+        <if test="keyword != null and keyword != ''">
+            <choose>
+                <when test="searchType == 'id'">
+                    ID LIKE '%' || #{keyword} || '%'
+                </when>
+
+                <when test="searchType == 'name'">
+                    MEMBER_NAME LIKE '%' || #{keyword} || '%'
+                </when>
+
+                <when test="searchType == 'phone'">
+                    PHONE_NUMBER LIKE '%' || #{keyword} || '%'
+                </when>
+
+                <otherwise>
+                    (
+                        ID LIKE '%' || #{keyword} || '%'
+                        OR MEMBER_NAME LIKE '%' || #{keyword} || '%'
+                        OR PHONE_NUMBER LIKE '%' || #{keyword} || '%'
+                    )
+                </otherwise>
+            </choose>
+        </if>
+    </where>
+    ORDER BY MEMBER_NO DESC
+	</where>
+	</select>
 	
 </mapper>
