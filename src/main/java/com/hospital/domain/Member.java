@@ -11,5 +11,6 @@ public class Member {
 	private String phoneNumber;
 	private Date birthDate;
 	private String address;
+	private Date regDate;
 	
 }
