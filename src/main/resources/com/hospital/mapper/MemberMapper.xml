@@ -22,5 +22,14 @@
 	DELETE FROM MEMBER WHERE MEMBER_NO = #{memberNo}
 	</delete>
 	
+	<select id="list" resultType="Member">
+	SELECT MEMBER_NO, ID, MEMBER_NEME, PHONE_NUMBER,REGDATE FROM MEMBER
+	ORDER BY MEMBER_NO DESC
+	</select>
+	
+	<select id="read" resultType="Member">
+	SELECT * FROM MEMBER WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
 	
 </mapper>
