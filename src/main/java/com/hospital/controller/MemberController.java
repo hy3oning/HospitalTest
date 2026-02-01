@@ -22,16 +22,30 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
+	/**
+	 * 회원가입폼
+	 * @return member/register
+	 */
 	@GetMapping("/register")
 	public String memberRegister() {
 		return "member/register";
 	}
 
+	/**
+	 * 로그인
+	 * @return member/login
+	 */
 	@GetMapping("/login")
 	public String loginForm() {
 		return "member/login";
 	}
 
+	/**
+	 * 로그인성공후
+	 * @param member
+	 * @param model "error message"
+	 * @return member/login | member/loginSuccess
+	 */
 	@PostMapping("/login")
 	public String memberLogin(Member member, Model model) {
 		try {
@@ -48,6 +62,12 @@ public class MemberController {
 
 	}
 
+	/**
+	 * 멤버 추가
+	 * @param member
+	 * @param model 성공,실패 message
+	 * @return member/success | member/failed
+	 */
 	@PostMapping("/insert")
 	public String memberInsert(Member member, Model model) {
 		log.info("insert member = " + member.toString());
