@@ -1,5 +1,7 @@
 package com.hospital.controller;
 
+import java.util.List;
+
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import com.hospital.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
 
+
 @Controller
 @Slf4j
 @MapperScan(basePackages = "com.hospital.mapper")
@@ -24,6 +27,7 @@ public class MemberController {
 
 	/**
 	 * 회원가입폼
+	 * 
 	 * @return member/register
 	 */
 	@GetMapping("/register")
@@ -33,6 +37,7 @@ public class MemberController {
 
 	/**
 	 * 로그인
+	 * 
 	 * @return member/login
 	 */
 	@GetMapping("/login")
@@ -42,8 +47,9 @@ public class MemberController {
 
 	/**
 	 * 로그인성공후
+	 * 
 	 * @param member
-	 * @param model "error message"
+	 * @param model  "error message"
 	 * @return member/login | member/loginSuccess
 	 */
 	@PostMapping("/login")
@@ -63,9 +69,10 @@ public class MemberController {
 	}
 
 	/**
-	 * 멤버 추가
+	 * 회원 추가
+	 * 
 	 * @param member
-	 * @param model 성공,실패 message
+	 * @param model  성공,실패 message
 	 * @return member/success | member/failed
 	 */
 	@PostMapping("/insert")
@@ -83,5 +90,40 @@ public class MemberController {
 		}
 		return "member/failed";
 	}
+
+	/**
+	 * 회원 목록
+	 * 
+	 * @param model
+	 * @return member/memberList
+	 */
+	@GetMapping("/memberList")
+	public String memberList(Model model) {
+		log.info("memberList");
+		try {
+			List<Member> memberList = memberService.list();
+			model.addAttribute("memberList", memberList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "member/memberList";
+	}
+	
+	@GetMapping("/detail")
+	public String memberDetail(Member m, Model model) {
+		log.info("Detail =" + m.getMemberNo());
+		try {
+			Member member  = memberService.read(m);
+			if(member == null) {
+				model.addAttribute("message", "회원 정보가 없습니다.");
+				return "member/failed";
+			}
+			model.addAttribute("member",member);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "member/detail";
+	}
+	
 
 }
