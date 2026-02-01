@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hospital.mapper.MemberMapper">
 	<insert id="create">
-	INSERT INTO MEMBER(MEMBER_NO,ID,PASSWORD,MEMBER_NAME,BIRTH_DATE,ADDRESS,REGDATE)
+	INSERT INTO MEMBER(MEMBER_NO,ID,PASSWORD,MEMBER_NAME,PHONE_NUMBER,BIRTH_DATE,ADDRESS,REGDATE)
 	VALUES (MEMBER_SEQ.NEXTVAL,#{id},#{password},#{memberName},#{phoneNumber},#{birthDate},#{address},SYSDATE)
 	</insert>
 
