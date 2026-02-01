@@ -131,6 +131,12 @@ public class MemberController {
 		return "member/detail";
 	}
 
+	/**
+	 * 회원 업데이트폼
+	 * @param m
+	 * @param model "message"
+	 * @return member/updateForm
+	 */
 	@GetMapping("/updateForm")
 	public String memberUpdateForm(Member m, Model model) {
 		log.info("memberUpdate" + m.toString());
@@ -147,6 +153,12 @@ public class MemberController {
 		return "member/updateForm";
 	}
 
+	/**
+	 * 회원 업데이트 저장
+	 * @param m
+	 * @param model "message"
+	 * @return member/success | member/failed
+	 */
 	@PostMapping("/update")
 	public String memberUpdate(Member m, Model model) {
 		log.info("memberUpdate member = " + m.toString());
@@ -163,6 +175,12 @@ public class MemberController {
 		return "member/failed";
 	}
 
+	/**
+	 * 회원 삭제
+	 * @param member
+	 * @param model "message"
+	 * @return 성공 실패 화면
+	 */
 	@PostMapping("/delete")
 	public String deleteMember(Member member, Model model) {
 		log.info("Delete member =" + member.toString());
@@ -178,6 +196,12 @@ public class MemberController {
 		return "member/failed";
 	}
 
+	/**
+	 * 회원 검색
+	 * @param member
+	 * @param model memberList
+	 * @return member/memberList
+	 */
 	@GetMapping("/search")
 	public String memberSearch(Member member, Model model) {
 		log.info("memberSearch member =" + member.toString());
